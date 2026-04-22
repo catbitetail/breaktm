@@ -2271,19 +2271,19 @@
                 updateCloudStatus('ok', '已同步 · ' + new Date().toLocaleTimeString());
             } catch (e) { updateCloudStatus('err', '同步失败: ' + e.message); }
         }
-        async function syncFromCloud() {
-            if (!cloudConfig.apiUrl || !cloudConfig.token) return showToast('请先配置API');
+        async function syncFromCloud(silent) {
+            if (!cloudConfig.apiUrl || !cloudConfig.token) { if (!silent) showToast('请先配置API'); return; }
             try {
-                updateCloudStatus('wait', '拉取中...');
+                updateCloudStatus('wait', '同步中...');
                 const res = await fetch(cloudConfig.apiUrl, { headers: { 'Authorization': 'Bearer ' + cloudConfig.token } });
                 if (!res.ok) throw new Error('HTTP ' + res.status);
                 const json = await res.json();
                 if (json.data) {
                     const ct = json.data._syncedAt || 0, lt = state._syncedAt || 0;
-                    if (ct > lt) { state = { ...json.data }; if (!state.skippedToday) state.skippedToday = {}; localStorage.setItem('nju_exam_state', JSON.stringify(state)); renderAll(); updateCloudStatus('ok', '已从云端同步'); return; }
+                    if (ct > lt) { state = { ...json.data }; if (!state.skippedToday) state.skippedToday = {}; localStorage.setItem('nju_exam_state', JSON.stringify(state)); renderAll(); updateCloudStatus('ok', '已从云端同步'); if (silent) showToast('☁️ 已同步最新数据'); return; }
                 }
                 updateCloudStatus('ok', '本地已是最新');
-            } catch (e) { updateCloudStatus('err', '拉取失败: ' + e.message); }
+            } catch (e) { updateCloudStatus('err', '拉取失败: ' + e.message); if (!silent) showToast('同步失败: ' + e.message); }
         }
         function updateCloudStatus(type, text) {
             const el = document.getElementById('cloudStatus');
@@ -3046,7 +3046,7 @@
         renderHome();
         renderModules();
         renderSettings();
-        if (cloudConfig.apiUrl && cloudConfig.token) syncFromCloud();
+        if (cloudConfig.apiUrl && cloudConfig.token) syncFromCloud(true);
 
     </script>
 </body>
