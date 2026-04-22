@@ -1,0 +1,14 @@
+{
+  "name": "BreakTM 南大机试备考",
+  "short_name": "BreakTM",
+  "description": "南大保研机试30天备考规划工具",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#faf5f8",
+  "theme_color": "#c0a8bb",
+  "orientation": "portrait",
+  "icons": [
+    { "src": "icon-192.svg", "sizes": "192x192", "type": "image/svg+xml" },
+    { "src": "icon-512.svg", "sizes": "512x512", "type": "image/svg+xml" }
+  ]
+}

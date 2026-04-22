@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f5e6f0"/>
+      <stop offset="100%" style="stop-color:#e8d5e0"/>
+    </linearGradient>
+  </defs>
+  <rect width="192" height="192" rx="40" fill="url(#bg)"/>
+  <text x="96" y="78" text-anchor="middle" font-family="serif" font-size="32" font-weight="700" fill="#6b4c5e">Break</text>
+  <text x="96" y="118" text-anchor="middle" font-family="serif" font-size="38" font-weight="800" fill="#c0a8bb">TM</text>
+  <text x="96" y="152" text-anchor="middle" font-family="sans-serif" font-size="16" fill="#a08898">南大机试</text>
+</svg>
